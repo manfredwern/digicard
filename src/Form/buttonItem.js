@@ -7,7 +7,7 @@ function ButtonItem({name, handleAction}) {
     return(
         <>
           <button type='button'
-                className='action-button'
+                className='btn btn-secondary me-3'
                 name={name + 'Btn'}
                 onClick={handleAction}>{capitalizeFirstLetter(name)}</button>
         </>

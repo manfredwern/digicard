@@ -2,7 +2,7 @@ import react, { useState } from 'react'
 import ActionItem from './actionItem'
 import ButtonItem from './buttonItem'
 
-function Form() {
+function Form({ user, handleChange, updateProfile }) {
 
     const [actionBtns, setActionBtns] = useState({
         facebookBtn: false,
@@ -10,18 +10,6 @@ function Form() {
         linkedInBtn: false,
         mobileBtn: false
     })
-
-    const [profile, setProfile] = useState({})
-
-    function handleChange(e) {
-        e.preventDefault();
-        const isImage = e.target.result
-        const propName = isImage ? 'profilePhoto' : e.target.name
-        setProfile(profile => profile = {
-            ...profile,
-            [propName]: isImage ? isImage : e.target.value
-        })
-    }
 
     function handleAction(e) {
         e.preventDefault();
@@ -32,12 +20,13 @@ function Form() {
     }
 
     function handleRemoveAction(buttonName) {
-        if (profile[buttonName]) {
-            delete profile[buttonName]
+        let newUser = { ...user }
+        if (newUser[buttonName]) {
+            // update profile whenever an action is removed
+            delete newUser[buttonName]
+            updateProfile(newUser)
         }
-
         const actionBtnName = buttonName + 'Btn';
-
         setActionBtns(actionBtns => actionBtns = {
             ...actionBtns,
             [actionBtnName]: !actionBtns[actionBtnName]
@@ -50,53 +39,82 @@ function Form() {
         fileData.readAsDataURL(e);
     }
 
+
+    function handleDeletePhoto() {
+        console.log(user.profilePhoto)
+        let newUser = { ...user }
+        if (newUser && newUser.profilePhoto) {
+            delete newUser.profilePhoto
+            updateProfile(newUser)
+        }
+    }
+
     return (
         <div>
-            <label htmlFor="file">Upload profile photo</label>
-            <input
-                type="file"
-                id="file"
-                data-testid="photo-upload"
-                name='profile-photo'
-                onChange={e =>
-                    handleInputFile(e.target.files[0])}
-                accept="image/png, image/jpg, image/jpeg"
-                multiple
-            />
-            <label htmlFor='firstName'>First Name</label>
-            <input
-                type="text"
-                name='firstName'
-                id='firstName'
-                onChange={handleChange}
-            >
-            </input>
-            <br></br>
-            <label htmlFor='lastName'>Last Name</label>
-            <input
-                type="text"
-                name='lastName'
-                id='lastName'
-                onChange={handleChange}>
-            </input>
-            <br></br>
-            <label htmlFor='jobTitle'>Job Title</label>
-            <input
-                type="text"
-                name='jobTitle'
-                id='jobTitle'
-                onChange={handleChange}>
-            </input>
-            <br></br>
-            <label htmlFor='additionalInfo'>Additional Information</label>
-            <textarea
-                name='additionalInfo'
-                id='additionalInfo'
-                onChange={handleChange}></textarea>
+            <div className="input-group mb-3">
+                <label htmlFor="file" className='input-group-text'>Upload profile photo</label>
+                <input
+                    type="file"
+                    className='form-control'
+                    id="file"
+                    data-testid="photoUpload"
+                    name='profile-photo'
+                    onChange={e =>
+                        handleInputFile(e.target.files[0])}
+                    accept="image/png, image/jpg, image/jpeg"
 
-            <br></br>
-            <br></br>
-            <br></br>
+                />
+                {user?.profilePhoto && <button type='button' className='btn btn-primary' data-testid="removePhoto" onClick={() => handleDeletePhoto()}>remove profile photo</button>}
+
+            </div>
+            {/* <button type='button' data-testid="removePhoto" onClick={() => handleDeletePhoto()} hidden>remove profile photo</button> */}
+            <div className="form-floating mb-3">
+                <input
+                    type="text"
+                    className='form-control'
+                    name='firstName'
+                    id='firstName'
+                    placeholder="John"
+                    onChange={handleChange}
+                >
+                </input>
+                <label htmlFor='firstName' className=''>First Name</label>
+
+            </div>
+            <div className="form-floating mb-3">
+                <input
+                    type="text"
+                    className='form-control'
+                    name='lastName'
+                    id='lastName'
+                    placeholder='Doe'
+                    onChange={handleChange}>
+                </input>
+                <label htmlFor='lastName' className=''>Last Name</label>
+            </div>
+
+            <div className="form-floating mb-3">
+                <input
+                    type="text"
+                    className='form-control'
+                    name='jobTitle'
+                    id='jobTitle'
+                    placeholder='Frontend Developer'
+                    onChange={handleChange}>
+                </input>
+                <label htmlFor='jobTitle' className=''>Job Title</label>
+            </div>
+
+            <div className="form-floating mb-4">
+                <textarea
+                    name='additionalInfo'
+                    id='additionalInfo'
+                    placeholder='Some description'
+                    className='form-control'
+                    onChange={handleChange}></textarea>
+                <label htmlFor='additionalInfo' className='form-label'>Additional Information</label>
+            </div>
+
 
             {actionBtns && actionBtns.facebookBtn && (
                 <>
@@ -172,8 +190,6 @@ function Form() {
                 )
             }
 
-
-            <pre>{JSON.stringify(profile)}</pre>
             <pre>{JSON.stringify(actionBtns)}</pre>
 
         </div>

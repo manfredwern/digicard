@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event';
 import Form from './Form'
 
@@ -89,21 +89,48 @@ describe('Basic User Information', () => {
 
     describe('Adding a profile photo', () => {
         test('upload button should be initially visible', () => {
-            const uploadInputElement = screen.getByTestId(/photo-upload/i)
+            const uploadInputElement = screen.getByTestId(/photoupload/i)
             expect(uploadInputElement).toBeInTheDocument()
         })
     
         test('upload profile photo', () => {
-            const file = new File(['profile-photo'], 'profile-photo.jpeg', {type: 'image/jpeg'})
-            const input = screen.getByTestId(/photo-upload/i)
+            const file = new File(['profile-photo'], 'src/profile-photo.jpeg', {type: 'image/jpeg'})
+            const uploadInputElement = screen.getByTestId(/photoupload/i)
     
-            userEvent.upload(input, file)
+            userEvent.click(uploadInputElement)
+            userEvent.upload(uploadInputElement, file)
           
-            expect(input.files[0]).toStrictEqual(file)
-            expect(input.files.item(0)).toStrictEqual(file)
-            expect(input.files).toHaveLength(1)
-          })
+            expect(uploadInputElement.files[0]).toStrictEqual(file)
+            expect(uploadInputElement.files.item(0)).toStrictEqual(file)
+            expect(uploadInputElement.files).toHaveLength(1)
+        })
 
+        // test('remove profile photo', async () => {
+        //     // const deletePhoto = screen.queryByRole('button', {
+        //     //     name: /remove\s?profile\s?photo/i
+        //     // })
+        //     // expect(deletePhoto).not.toBeInTheDocument()
+
+        //     await waitFor(() => {
+        //         expect(screen.queryByText(/remove\s?profile\s?photo/i)).not.toBeInTheDocument()
+        //     })
+
+        //     const file = new File(['profile-photo'], 'src/profile-photo.jpeg', {type: 'image/jpeg'})
+        //     const uploadInputElement = await screen.getByTestId(/photoupload/i)
+            
+        //     // userEvent.click(uploadInputElement)
+        //     userEvent.upload(uploadInputElement, file)
+        //     expect(uploadInputElement.files[0]).toStrictEqual(file)
+        //     expect(uploadInputElement.files.item(0)).toStrictEqual(file)
+        //     expect(uploadInputElement.files).toHaveLength(1)
+
+        //     userEvent.click(uploadInputElement)
+            
+        //     await waitFor(() => {
+        //         expect(screen.queryByText(/remove\s?profile\s?photo/i)).toBeVisible()
+        //     })
+
+        // })
     })
 
     describe('Input user information to textbox', () => {
