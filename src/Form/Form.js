@@ -51,8 +51,10 @@ function Form({ user, handleChange, updateProfile }) {
 
     return (
         <div>
+            <h5>Primary Information</h5>
+
+            <label htmlFor="file" className='form-label'>Upload profile photo</label>
             <div className="input-group mb-3">
-                <label htmlFor="file" className='input-group-text'>Upload profile photo</label>
                 <input
                     type="file"
                     className='form-control'
@@ -64,7 +66,7 @@ function Form({ user, handleChange, updateProfile }) {
                     accept="image/png, image/jpg, image/jpeg"
 
                 />
-                {user?.profilePhoto && <button type='button' className='btn btn-primary' data-testid="removePhoto" onClick={() => handleDeletePhoto()}>remove profile photo</button>}
+                {user?.profilePhoto && <button type='button' className='btn btn-outline-danger' data-testid="removePhoto" onClick={() => handleDeletePhoto()}>remove</button>}
 
             </div>
             {/* <button type='button' data-testid="removePhoto" onClick={() => handleDeletePhoto()} hidden>remove profile photo</button> */}
@@ -115,6 +117,7 @@ function Form({ user, handleChange, updateProfile }) {
                 <label htmlFor='additionalInfo' className='form-label'>Additional Information</label>
             </div>
 
+            <h5>Add Contact Details</h5>
 
             {actionBtns && actionBtns.facebookBtn && (
                 <>
@@ -152,9 +155,7 @@ function Form({ user, handleChange, updateProfile }) {
                 </>
             )}
 
-            <br></br>
-            <br></br>
-            <br></br>
+
 
 
             {
@@ -189,8 +190,6 @@ function Form({ user, handleChange, updateProfile }) {
                         handleAction={handleAction}></ButtonItem>
                 )
             }
-
-            <pre>{JSON.stringify(actionBtns)}</pre>
 
         </div>
     )

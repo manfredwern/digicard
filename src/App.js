@@ -6,7 +6,13 @@ import ProfileCard from './ProfileCard/ProfileCard';
 
 function App() {
 
-  const [userProfile, setUserProfile] = useState({})
+  const [userProfile, setUserProfile] = useState({
+    firstName: 'Mamerdo',
+    lastName: 'Penduco',
+    jobTitle: 'Painter',
+    additionalInfo: 'I speak Quechua',
+    facebook: 'https://facebook.mamerdo.profile'
+  })
 
   // Handle changes made in the form
   function handleChange(e) {
@@ -25,17 +31,14 @@ function App() {
   }
 
   return (
-    <div className='container'>
+    <div className='container mt-5'>
       <div className='row'>
-        <div className='col col-6'>
+        <div className='col-md-6 col-12'>
           <Form user={userProfile} handleChange={handleChange} updateProfile={updateUserProfile}></Form>
         </div>
-        <div className='col col-6'>
+        <div className='col-md-6 col-12'>
           <ProfileCard user={userProfile}></ProfileCard>
         </div>
-      </div>
-      <div className='row'>
-        <pre>{JSON.stringify(userProfile)}</pre>
       </div>
     </div>
   );
