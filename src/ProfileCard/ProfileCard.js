@@ -8,11 +8,17 @@ function ProfileCard({ user }) {
 
     return (
         <div className="card text-center">
-            {user && user.profilePhoto && <>
-                <img src={user.profilePhoto} className="profile-photo card-img-top" alt="..."></img>
-            </>}
-            <div className="card-body">
-                <h5 className="card-title">
+            <div className='card-header p-0 d-flex'>
+                <div className='photo-container'>
+                    <div className='photo-circle'>
+                        {user && user.profilePhoto && <>
+                            <img src={user.profilePhoto} className="profile-photo card-img-top" alt="profile photo"></img>
+                        </>}
+                    </div>
+                </div>
+            </div>
+            <div className="card-body pt-5">
+                <h5 className="card-title mt-5">
                     {user && user.firstName && <>{user.firstName}</>}
                     &nbsp;
                     {user && user.lastName && <>{user.lastName}</>}

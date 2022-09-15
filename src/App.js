@@ -7,6 +7,7 @@ import ProfileCard from './ProfileCard/ProfileCard';
 function App() {
 
   const [userProfile, setUserProfile] = useState({
+    profilePhoto: 'profile-photo.jpeg',
     firstName: 'Mamerdo',
     lastName: 'Penduco',
     jobTitle: 'Painter',
