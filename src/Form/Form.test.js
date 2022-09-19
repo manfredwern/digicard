@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import Form from './Form'
 
 beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
     render(<Form />)
 })
 

@@ -8,12 +8,10 @@ function ButtonItem({name, handleAction}) {
         <>
           <button type='button'
                 className='btn btn-secondary me-3'
-                name={name + 'Btn'}
+                name={name}
                 onClick={handleAction}>{capitalizeFirstLetter(name)}</button>
         </>
     )
-
-
 }
 
 export default ButtonItem

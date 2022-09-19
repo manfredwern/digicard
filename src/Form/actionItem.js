@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 function ActionItem({ name, handleAction, handleRemoveAction }) {
 
@@ -18,10 +20,11 @@ function ActionItem({ name, handleAction, handleRemoveAction }) {
             </input>
             <button
                 type='button'
-                className='btn btn-outline-danger remove-action-btn'
+                className='btn remove-action-btn'
                 name={'remove' + capitalizeFirstLetter(name)}
+                aria-label='remove'
                 onClick={() => handleRemoveAction(name)}
-            >remove</button>
+            ><FontAwesomeIcon icon={faTrashCan} /></button>
         </div>
     )
 }

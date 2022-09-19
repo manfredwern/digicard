@@ -1,14 +1,16 @@
 import { useState } from 'react'
 import ActionItem from './actionItem'
 import ButtonItem from './buttonItem'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
 function Form({ user, handleChange, updateProfile }) {
 
     const [actionBtns, setActionBtns] = useState({
-        facebookBtn: false,
-        instagramBtn: false,
-        linkedInBtn: false,
-        mobileBtn: false
+        facebook: false,
+        instagram: false,
+        linkedIn: false,
+        mobile: false
     })
 
     function handleAction(e) {
@@ -25,7 +27,7 @@ function Form({ user, handleChange, updateProfile }) {
             delete newUserInput[buttonName]
             updateProfile(newUserInput)
         }
-        const actionBtnName = buttonName + 'Btn';
+        const actionBtnName = buttonName;
         setActionBtns(actionBtns => actionBtns = {
             ...actionBtns,
             [actionBtnName]: !actionBtns[actionBtnName]
@@ -46,10 +48,6 @@ function Form({ user, handleChange, updateProfile }) {
         }
     }
 
-    function removeBtnStr(str) {
-        return str.replace(/btn$/i, '')
-   }
-
     return (
         <div>
             <h5>Primary Information</h5>
@@ -66,7 +64,10 @@ function Form({ user, handleChange, updateProfile }) {
                         handleInputFile(e.target.files[0])}
                     accept="image/png, image/jpg, image/jpeg"
                 />
-                {user?.profilePhoto && <button type='button' className='btn btn-outline-danger' data-testid="removePhoto" onClick={() => handleDeletePhoto()}>remove</button>}
+                {user?.profilePhoto && 
+                    <button type='button' className='btn' data-testid="removePhoto" onClick={() => handleDeletePhoto()}>
+                        <FontAwesomeIcon icon={faTrashCan} />
+                    </button>}
 
             </div>
 
@@ -80,7 +81,7 @@ function Form({ user, handleChange, updateProfile }) {
                     onChange={handleChange}
                 >
                 </input>
-                <label htmlFor='firstName' className=''>First Name</label>
+                <label htmlFor='firstName'>First Name</label>
 
             </div>
             <div className="form-floating mb-3">
@@ -92,7 +93,7 @@ function Form({ user, handleChange, updateProfile }) {
                     placeholder='Doe'
                     onChange={handleChange}>
                 </input>
-                <label htmlFor='lastName' className=''>Last Name</label>
+                <label htmlFor='lastName'>Last Name</label>
             </div>
 
             <div className="form-floating mb-3">
@@ -104,7 +105,7 @@ function Form({ user, handleChange, updateProfile }) {
                     placeholder='Frontend Developer'
                     onChange={handleChange}>
                 </input>
-                <label htmlFor='jobTitle' className=''>Job Title</label>
+                <label htmlFor='jobTitle'>Job Title</label>
             </div>
 
             <div className="form-floating mb-4">
@@ -123,7 +124,7 @@ function Form({ user, handleChange, updateProfile }) {
                     actionBtns[action] &&
                         <ActionItem 
                             key={index}
-                            name={removeBtnStr(action)}
+                            name={action}
                             handleAction={handleChange}
                             handleRemoveAction={handleRemoveAction}
                         ></ActionItem>
@@ -134,7 +135,7 @@ function Form({ user, handleChange, updateProfile }) {
                     !actionBtns[action] &&
                     <ButtonItem
                         key={index}
-                        name={removeBtnStr(action)}
+                        name={action}
                         handleAction={handleAction}>
                     </ButtonItem>
                     
