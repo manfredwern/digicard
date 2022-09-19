@@ -1,4 +1,4 @@
-import react, { useState } from 'react'
+import { useState } from 'react'
 import ActionItem from './actionItem'
 import ButtonItem from './buttonItem'
 
@@ -20,11 +20,10 @@ function Form({ user, handleChange, updateProfile }) {
     }
 
     function handleRemoveAction(buttonName) {
-        let newUser = { ...user }
-        if (newUser[buttonName]) {
-            // update profile whenever an action is removed
-            delete newUser[buttonName]
-            updateProfile(newUser)
+        let newUserInput = { ...user }
+        if (newUserInput[buttonName]) {
+            delete newUserInput[buttonName]
+            updateProfile(newUserInput)
         }
         const actionBtnName = buttonName + 'Btn';
         setActionBtns(actionBtns => actionBtns = {
@@ -34,20 +33,22 @@ function Form({ user, handleChange, updateProfile }) {
     }
 
     function handleInputFile(e) {
-        let fileData = new FileReader();
+        let fileData = new FileReader()
         fileData.onloadend = handleChange
-        fileData.readAsDataURL(e);
+        fileData.readAsDataURL(e)
     }
 
-
     function handleDeletePhoto() {
-        console.log(user.profilePhoto)
         let newUser = { ...user }
         if (newUser && newUser.profilePhoto) {
             delete newUser.profilePhoto
             updateProfile(newUser)
         }
     }
+
+    function removeBtnStr(str) {
+        return str.replace(/btn$/i, '')
+   }
 
     return (
         <div>
@@ -64,12 +65,11 @@ function Form({ user, handleChange, updateProfile }) {
                     onChange={e =>
                         handleInputFile(e.target.files[0])}
                     accept="image/png, image/jpg, image/jpeg"
-
                 />
                 {user?.profilePhoto && <button type='button' className='btn btn-outline-danger' data-testid="removePhoto" onClick={() => handleDeletePhoto()}>remove</button>}
 
             </div>
-            {/* <button type='button' data-testid="removePhoto" onClick={() => handleDeletePhoto()} hidden>remove profile photo</button> */}
+
             <div className="form-floating mb-3">
                 <input
                     type="text"
@@ -117,80 +117,29 @@ function Form({ user, handleChange, updateProfile }) {
                 <label htmlFor='additionalInfo' className='form-label'>Additional Information</label>
             </div>
 
-            <h5>Add Contact Details</h5>
+            <h5>Additional Information</h5>
 
-            {actionBtns && actionBtns.facebookBtn && (
-                <>
-                    <ActionItem
-                        name="facebook"
-                        handleAction={handleChange}
-                        handleRemoveAction={handleRemoveAction}></ActionItem>
-                </>
-            )}
-            {actionBtns && actionBtns.instagramBtn && (
-                <>
-                    <ActionItem
-                        name="instagram"
-                        handleAction={handleChange}
-                        handleRemoveAction={handleRemoveAction}>
-                    </ActionItem>
-                </>
-            )}
-            {actionBtns && actionBtns.linkedInBtn && (
-                <>
-                    <ActionItem
-                        name="linkedIn"
-                        handleAction={handleChange}
-                        handleRemoveAction={handleRemoveAction}>
-                    </ActionItem>
-                </>
-            )}
-            {actionBtns && actionBtns.mobileBtn && (
-                <>
-                    <ActionItem
-                        name="mobile"
-                        handleAction={handleChange}
-                        handleRemoveAction={handleRemoveAction}>
-                    </ActionItem>
-                </>
-            )}
+            {actionBtns && Object.keys(actionBtns).map((action, index) => (
+                    actionBtns[action] &&
+                        <ActionItem 
+                            key={index}
+                            name={removeBtnStr(action)}
+                            handleAction={handleChange}
+                            handleRemoveAction={handleRemoveAction}
+                        ></ActionItem>
+                    
+            ))}
 
-
-
-
-            {
-                actionBtns && !actionBtns.facebookBtn &&
-                (
+            {actionBtns && Object.keys(actionBtns).map((action, index) => (
+                    !actionBtns[action] &&
                     <ButtonItem
-                        name='facebook'
-                        handleAction={handleAction}></ButtonItem>
-                )
-            }
-            {
-                actionBtns && !actionBtns.instagramBtn &&
-                (
-                    <ButtonItem
-                        name='instagram'
-                        handleAction={handleAction}></ButtonItem>
-                )
-            }
-            {
-                actionBtns && !actionBtns.linkedInBtn &&
-                (
-                    <ButtonItem
-                        name='linkedIn'
-                        handleAction={handleAction}></ButtonItem>
-                )
-            }
-            {
-                actionBtns && !actionBtns.mobileBtn &&
-                (
-                    <ButtonItem
-                        name='mobile'
-                        handleAction={handleAction}></ButtonItem>
-                )
-            }
-
+                        key={index}
+                        name={removeBtnStr(action)}
+                        handleAction={handleAction}>
+                    </ButtonItem>
+                    
+            ))}        
+          
         </div>
     )
 }

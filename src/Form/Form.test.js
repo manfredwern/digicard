@@ -120,7 +120,6 @@ describe('Basic User Information', () => {
             const uploadInputElement = screen.getByTestId(/photoupload/i)
             expect(uploadInputElement).toBeInTheDocument()
         })
-
         test('upload profile photo', () => {
             const file = new File(['profile-photo'], 'src/profile-photo.jpeg', { type: 'image/jpeg' })
             const uploadInputElement = screen.getByTestId(/photoupload/i)
@@ -167,17 +166,14 @@ describe('Basic User Information', () => {
             const { firstNameInputElement } = typeIntoForm({ firstName: "John" })
             expect(firstNameInputElement.value).toBe("John")
         })
-
         test('should type in a last name', () => {
             const { lastNameInputElement } = typeIntoForm({ lastName: "Doe" })
             expect(lastNameInputElement.value).toBe("Doe")
         })
-
         test('should type in a job title', () => {
             const { jobTitleInputElement } = typeIntoForm({ jobTitle: "Frontend Developer" })
             expect(jobTitleInputElement.value).toBe("Frontend Developer")
         })
-
         test('should type in additional information', () => {
             const { additionalInfoInputElement } = typeIntoForm({ additionalInfo: "some information" })
             expect(additionalInfoInputElement.value).toBe("some information")
@@ -185,14 +181,10 @@ describe('Basic User Information', () => {
 
     })
 
-
-
 })
 
 describe('Additional User Information', () => {
-
     test('all four action buttons with should be visible', () => {
-
         const {
             facebookBtn,
             instagramBtn,
@@ -204,16 +196,13 @@ describe('Additional User Information', () => {
         expect(instagramBtn).toBeInTheDocument()
         expect(linkedInBtn).toBeInTheDocument()
         expect(mobileBtn).toBeInTheDocument()
-
     })
-
     test('Facebook input fields should not be visible initally', () => {
         const facebookInputElement = screen.queryByRole('textbox', {
             name: /facebook/i
         })
         expect(facebookInputElement).not.toBeInTheDocument()
     })
-
     test('Instagram input fields should not be visible initally', () => {
         const instagramInputElement = screen.queryByRole('textbox', {
             name: /instagram/i
@@ -364,6 +353,5 @@ describe('Additional User Information', () => {
             expect(mobileInputAgain).not.toBeInTheDocument()
         })
     })
-
 
 })

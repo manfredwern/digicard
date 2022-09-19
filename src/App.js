@@ -8,23 +8,25 @@ function App() {
 
   const [userProfile, setUserProfile] = useState({
     profilePhoto: 'profile-photo.jpeg',
-    firstName: 'Mamerdo',
-    lastName: 'Penduco',
-    jobTitle: 'Painter',
-    additionalInfo: 'I speak Quechua',
-    facebook: 'https://facebook.mamerdo.profile'
+    firstName: 'Dev',
+    lastName: 'Eloper',
+    jobTitle: 'Frontend Engineer',
+    additionalInfo: 'I speak code',
+    facebook: 'facebook.profile',
+    instagram: 'instagram',
+    linkedIn: 'linkedIn',
+    mobile: 'mobile number'
   })
 
-  // Handle changes made in the form
-  function handleChange(e) {
+  function handleFormChanges(e) {
     e.preventDefault();
     const isImage = e.target.result
     const property = isImage ? 'profilePhoto' : e.target.name
-    const newUser = {
+
+    updateUserProfile({
       ...userProfile,
       [property]: isImage ? isImage : e.target.value
-    }
-    updateUserProfile(newUser)
+    })
   }
 
   function updateUserProfile(data) {
@@ -35,7 +37,11 @@ function App() {
     <div className='container mt-5'>
       <div className='row'>
         <div className='col-md-6 col-12'>
-          <Form user={userProfile} handleChange={handleChange} updateProfile={updateUserProfile}></Form>
+          <Form 
+            user={userProfile} 
+            handleChange={handleFormChanges}
+            updateProfile={updateUserProfile}>
+          </Form>
         </div>
         <div className='col-md-6 col-12'>
           <ProfileCard user={userProfile}></ProfileCard>

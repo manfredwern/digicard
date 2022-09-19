@@ -1,7 +1,9 @@
 .card {
     background-color: var(--dark1);
     overflow: hidden;
-    /* box-shadow: 2px 2px 20px #999; */
+    align-self: normal;
+    margin: 0 auto;   
+    max-width: 70%;
   }
 
 .card-header {

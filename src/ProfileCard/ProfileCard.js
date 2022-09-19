@@ -1,6 +1,6 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEnvelope, faMobile, faPhone } from '@fortawesome/free-solid-svg-icons'
+import { faMobile } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons'
 import './ProfileCard.css'
 
@@ -12,7 +12,7 @@ function ProfileCard({ user }) {
                 <div className='photo-container'>
                     <div className='photo-circle'>
                         {user && user.profilePhoto && <>
-                            <img src={user.profilePhoto} className="profile-photo card-img-top" alt="profile photo"></img>
+                            <img src={user.profilePhoto} className="profile-photo card-img-top" alt="profile"></img>
                         </>}
                     </div>
                 </div>
@@ -28,20 +28,26 @@ function ProfileCard({ user }) {
                 </p>
                 <p className="card-text">
                     {user && user.additionalInfo && <>{user.additionalInfo}</>}</p>
-
-                {user && user.facebook && <div><p><FontAwesomeIcon icon={faFacebook} /> {user.facebook}</p></div>}
-                {user && user.instagram && <div><p><FontAwesomeIcon icon={faInstagram} /> {user.instagram}</p></div>}
-                {user && user.linkedIn && <div><p> <FontAwesomeIcon icon={faLinkedin} /> {user.linkedIn}</p></div>}
-                {user && user.mobile && <div><p>            <FontAwesomeIcon icon={faMobile} />
-                    {user.mobile}</p></div>}
+            
+                <div className='p-4'>
+                    {user && user.facebook &&
+                        <p className='text-start'>
+                            <FontAwesomeIcon icon={faFacebook} /> {user.facebook}
+                        </p>}
+                    {user && user.instagram && 
+                        <p className='text-start'>
+                            <FontAwesomeIcon icon={faInstagram} /> {user.instagram}
+                        </p>}
+                    {user && user.linkedIn && 
+                        <p className='text-start'>
+                            <FontAwesomeIcon icon={faLinkedin} /> {user.linkedIn}
+                        </p>}
+                    {user && user.mobile && 
+                        <p className='text-start'>
+                            <FontAwesomeIcon icon={faMobile} /> {user.mobile}
+                        </p>}
+                </div>
             </div>
-{/* 
-            <FontAwesomeIcon icon={faPhone} />
-            <FontAwesomeIcon icon={faEnvelope} /> */}
-            
-            
-           
-
         </div>
     )
 
