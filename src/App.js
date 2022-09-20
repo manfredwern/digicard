@@ -36,14 +36,14 @@ function App() {
   return (
     <div className='container mt-5'>
       <div className='row'>
-        <div className='col-md-6 col-12'>
+        <div className='col-md-6 col-12 p-4'>
           <Form 
             user={userProfile} 
             handleChange={handleFormChanges}
             updateProfile={updateUserProfile}>
           </Form>
         </div>
-        <div className='col-md-6 col-12'>
+        <div className='col-md-6 col-12 p-4'>
           <ProfileCard user={userProfile}></ProfileCard>
         </div>
       </div>

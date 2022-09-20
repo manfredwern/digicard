@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
+import './ActionItem.css'
 
 function ActionItem({ name, handleAction, handleRemoveAction }) {
 

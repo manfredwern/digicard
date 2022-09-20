@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import ActionItem from './actionItem'
-import ButtonItem from './buttonItem'
+import ActionItem from './ActionItem'
+import ButtonItem from './ButtonItem'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 
