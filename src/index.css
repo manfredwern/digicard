@@ -1,3 +1,10 @@
+:root {
+  --dark2: #1C6758;
+  --dark1: #3D8361;
+  --light2: #D6CDA4;
+  --light1: #EEF2E6;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -5,9 +12,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--dark2);
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--light1);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+
+button.btn {
+  background-color: var(--light2) !important;
+  color: black
 }

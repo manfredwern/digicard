@@ -1,0 +1,35 @@
+.card {
+    background-color: var(--dark1);
+    overflow: hidden;
+    align-self: normal;
+    margin: 0 auto;   
+    max-width: 70%;
+  }
+
+.card-header {
+    min-height: 200px;
+    position: relative;
+}
+
+.profile-photo {
+    max-height: 30vh;
+    object-fit: cover;
+    object-position: center;
+}
+
+.photo-container {
+    background-color: var(--light2);
+    width: 100%;
+}
+
+.photo-circle {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    height: 180px;
+    width: 180px;
+    border: 5px solid white;
+    background-color: #fff;
+    left: calc(50% - 85px);
+    bottom: -45%;
+} 
